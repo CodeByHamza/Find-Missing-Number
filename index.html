@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing Number Identification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Missing Number Identification</h1>
+        <form id="missingNumberForm">
+            <label for="numberSeries">Enter the series of numbers separated by commas:</label>
+            <input type="text" id="numberSeries" name="numberSeries" required><br>
+            <button type="submit">Find Missing Number</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById("missingNumberForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var numberSeriesString = document.getElementById("numberSeries").value;
+            var result = document.getElementById("result");
+
+            // Function to find the missing number from a series of numbers
+            function findMissingNumber(numbers) {
+                for (var i = 0; i < numbers.length - 1; i++) {
+                    if (numbers[i] + 1 !== numbers[i + 1]) {
+                        return numbers[i] + 1;
+                    }
+                }
+                return null;
+            }
+
+            // Convert the input string to an array of numbers
+            var numberSeriesArray = numberSeriesString.split(",").map(Number);
+
+            // Find the missing number
+            var missingNumber = findMissingNumber(numberSeriesArray);
+
+            // Display result
+            if (missingNumber !== null) {
+                result.innerHTML = "The missing number is: " + missingNumber;
+            } else {
+                result.innerHTML = "No missing number found.";
+            }
+        });
+    </script>
+</body>
+
+</html>
